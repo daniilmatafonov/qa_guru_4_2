@@ -1,11 +1,17 @@
 package page;
 
+import com.codeborne.selenide.Selectors;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import java.io.File;
 
-public class StudentPage{
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
+public class StudentPage {
 
     public void fillFirstName(By by, String userName) {
         $(by).shouldBe(visible).sendKeys(userName);
@@ -13,5 +19,56 @@ public class StudentPage{
 
     public void fillLastName(By by, String lastName) {
         $(by).shouldBe(visible).sendKeys(lastName);
+    }
+
+    public void fillEmail(By by, String email) {
+        $(by).shouldBe(visible).sendKeys(email);
+    }
+
+    public void chooseGender(String gender) {
+        $(byText(gender)).click();
+    }
+
+    public void fillMobile(By by, String number) {
+        $(by).shouldBe(visible).sendKeys(number);
+    }
+
+    public void setDatePicker(String date, String yearSelector, String monthSelector, String daySelector) {
+        String[] parsedDate = date.split("/");
+        $("#dateOfBirthInput").click();
+        $(yearSelector).click();
+        $(yearSelector).$$("option").findBy(text(parsedDate[2])).click();
+        $(monthSelector).click();
+        $(monthSelector).$$("option").findBy(text(parsedDate[1])).click();
+        $$(daySelector).findBy(text(parsedDate[0])).click();
+    }
+
+    public void fillSubject(By by, String firstTopicLetter, String subject) {
+        $(by).val(firstTopicLetter);
+        $(".subjects-auto-complete__menu-list").$(byText(subject)).click();
+    }
+
+    public void upload(By by, String fileName) {
+        File file = new File("./src/test/resources/" + fileName);
+        $(by).uploadFile(file);
+    }
+
+    public void hobbies(String hobby) {
+        $(Selectors.byXpath(hobby)).click();
+    }
+
+    public void curAddress(String selector, String text) {
+        $(By.cssSelector(selector)).sendKeys(text);
+    }
+
+    public void location(String state, String city) {
+        $("#state").scrollIntoView(true).click();
+        $(byText(state)).click();
+        $("#city").scrollIntoView(true).click();
+        $(byText(city)).click();
+    }
+
+    public void sendForm(String selector) {
+        $(selector).scrollIntoView(true).click();
     }
 }

@@ -30,66 +30,6 @@ public class StudentBuilder {
         this.city = city;
     }
 
-    public StudentBuilder firstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public StudentBuilder lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public StudentBuilder email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public StudentBuilder gender(String gender) {
-        this.gender = gender;
-        return this;
-    }
-
-    public StudentBuilder mobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-        return this;
-    }
-
-    public StudentBuilder date(String date) {
-        this.date = date;
-        return this;
-    }
-
-    public StudentBuilder subject(String subject) {
-        this.subject = subject;
-        return this;
-    }
-
-    public StudentBuilder hobby(String hobby) {
-        this.hobby = hobby;
-        return this;
-    }
-
-    public StudentBuilder fileName(String fileName) {
-        this.fileName = fileName;
-        return this;
-    }
-
-    public StudentBuilder curAddress(String curAddress) {
-        this.curAddress = curAddress;
-        return this;
-    }
-
-    public StudentBuilder state(String state) {
-        this.state = state;
-        return this;
-    }
-
-    public StudentBuilder city(String city) {
-        this.city = city;
-        return this;
-    }
-
     public Student build() {
         return new Student(firstName, lastName, email, gender, mobileNumber, date, subject, hobby, fileName, curAddress, state, city);
     }
