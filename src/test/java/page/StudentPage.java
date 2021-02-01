@@ -26,7 +26,7 @@ public class StudentPage {
     }
 
     public void chooseGender(String gender) {
-        $(byText(gender)).click();
+        $(byText(gender)).shouldBe(visible).click();
     }
 
     public void fillMobile(By by, String number) {
@@ -44,31 +44,31 @@ public class StudentPage {
     }
 
     public void fillSubject(By by, String firstTopicLetter, String subject) {
-        $(by).val(firstTopicLetter);
+        $(by).shouldBe(visible).setValue(firstTopicLetter);
         $(".subjects-auto-complete__menu-list").$(byText(subject)).click();
     }
 
     public void upload(By by, String fileName) {
         File file = new File("./src/test/resources/" + fileName);
-        $(by).uploadFile(file);
+        $(by).shouldBe(visible).uploadFile(file);
     }
 
     public void hobbies(String hobby) {
-        $(Selectors.byXpath(hobby)).click();
+        $(Selectors.byXpath(hobby)).shouldBe(visible).click();
     }
 
     public void curAddress(String selector, String text) {
-        $(By.cssSelector(selector)).sendKeys(text);
+        $(By.cssSelector(selector)).shouldBe(visible).sendKeys(text);
     }
 
     public void location(String state, String city) {
-        $("#state").scrollIntoView(true).click();
+        $("#state").shouldBe(visible).scrollIntoView(true).click();
         $(byText(state)).click();
-        $("#city").scrollIntoView(true).click();
+        $("#city").shouldBe(visible).scrollIntoView(true).click();
         $(byText(city)).click();
     }
 
     public void sendForm(String selector) {
-        $(selector).scrollIntoView(true).click();
+        $(selector).shouldBe(visible).scrollIntoView(true).click();
     }
 }
