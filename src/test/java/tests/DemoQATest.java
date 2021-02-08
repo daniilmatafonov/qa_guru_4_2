@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import data.Student;
 import data.StudentBuilder;
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ import static helpers.ConfigurationHelper.BASE_URL;
 public class DemoQATest {
 
     private StudentPage studentPage = new StudentPage();
+    private Faker faker;
 
     @BeforeAll
     public static void setUp() {
@@ -23,8 +25,15 @@ public class DemoQATest {
 
     @Test
     public void register() {
-        final Student student = createStudent("Daniil", "M", "test@mail.ru", "Male", "79000000000",
-                "1/September/1993", "Computer Science", "Sports", "mrburns.png", "Happy street", "Haryana", "Karnal");
+        faker = new Faker();
+        String firstName = faker.address().firstName();
+        String lastName = faker.address().lastName();
+        String emailAddress = faker.internet().emailAddress();
+        String streetName = faker.address().streetName();
+        String cellPhone = faker.phoneNumber().cellPhone();
+        String gender = faker.demographic().sex();
+        final Student student = createStudent(firstName, lastName, emailAddress, gender, cellPhone,
+                "1/September/1993", "Computer Science", "Sports", "mrburns.png", streetName, "Haryana", "Karnal");
         open("/");
         studentPage.fillFirstName(By.cssSelector("#firstName"), student.getFirstName());
         studentPage.fillLastName(By.cssSelector("#lastName"), student.getLastName());
