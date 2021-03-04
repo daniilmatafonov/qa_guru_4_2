@@ -19,6 +19,9 @@ public class DemoQATest {
     private static final String HOBBY = "Sports";
     private static final String SUBJECT = "Computer Science";
     private static final String DATE = "1/September/1993";
+    private static final String DAY = "31";
+    private static final String MONTH = "August";
+    private static final String YEAR = "1993";
 
     @BeforeAll
     public static void setUp() {
@@ -26,28 +29,31 @@ public class DemoQATest {
     }
 
     @Test
-    public void register() {
+    public void registerStudent() {
+        String location = STATE + " " + CITY;
         String firstName = faker.address().firstName();
         String lastName = faker.address().lastName();
+        String name = firstName + " " + lastName;
         String emailAddress = faker.internet().emailAddress();
-        String streetName = faker.address().streetName();
-        String cellPhone = faker.phoneNumber().cellPhone();
+        String address = faker.address().fullAddress();
+        String cellPhone = "79" + faker.number().digits(8);
         String gender = faker.demographic().sex();
         final Student student = new Student(firstName, lastName, emailAddress, gender, cellPhone,
-                DATE, SUBJECT, HOBBY, IMAGE_NAME, streetName, STATE, CITY);
+                DATE, SUBJECT, HOBBY, IMAGE_NAME, address, STATE, CITY);
         open("/");
         studentPage.fillFirstName(student.getFirstName());
         studentPage.fillLastName(student.getLastName());
         studentPage.fillEmail(student.getEmail());
         studentPage.chooseGender(student.getGender());
         studentPage.fillMobile(student.getMobileNumber());
-        studentPage.setDatePicker(student.getDate());
+        studentPage.setDatePicker(DAY, MONTH, YEAR);
         studentPage.fillSubject(student.getSubject());
         studentPage.upload(student.getFileName());
         studentPage.hobbies(student.getHobby());
         studentPage.curAddress(student.getCurAddress());
         studentPage.location(student.getState(), student.getCity());
         studentPage.sendForm();
+        studentPage.validateForm(name, student.getGender(), student.getEmail(), student.getMobileNumber(), MONTH, YEAR, DAY, location, student.getCurAddress(), student.getSubject(), student.getHobby(), student.getFileName());
     }
 
 }
