@@ -22,7 +22,7 @@ public class StudentPage {
     }
 
     public void chooseGender(String gender) {
-        $(byText(gender)).shouldBe(visible).click();
+        $(byText(gender)).click();
     }
 
     public void fillMobile(String number) {
@@ -42,21 +42,21 @@ public class StudentPage {
     }
 
     public void fillSubject(String subject) {
-        $("#subjectsInput").shouldBe(visible).setValue("Computer Science");
+        $("#subjectsInput").setValue("Computer Science");
         $(".subjects-auto-complete__menu-list").$(byText(subject)).click();
     }
 
     public void upload(String fileName) {
         File file = new File("./src/test/resources/" + fileName);
-        $("#uploadPicture").shouldBe(visible).uploadFile(file);
+        $("#uploadPicture").uploadFile(file);
     }
 
     public void hobbies(String hobby) {
-        $x("//label[contains(text(),'" + hobby + "')]").shouldBe(visible).click();
+        $x("//label[contains(text(),'" + hobby + "')]").click();
     }
 
     public void curAddress(String text) {
-        $("#currentAddress").shouldBe(visible).setValue(text);
+        $("#currentAddress").setValue(text);
     }
 
     public void location(String state, String city) {
