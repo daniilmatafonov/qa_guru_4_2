@@ -52,7 +52,7 @@ public class StudentPage {
     }
 
     public void hobbies(String hobby) {
-        $(byXpath("//label[contains(text(),'" + hobby + "')]")).shouldBe(visible).click();
+        $x("//label[contains(text(),'" + hobby + "')]").shouldBe(visible).click();
     }
 
     public void curAddress(String text) {
