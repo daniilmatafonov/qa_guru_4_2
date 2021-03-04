@@ -2,7 +2,6 @@ package tests;
 
 import com.github.javafaker.Faker;
 import data.Student;
-import org.openqa.selenium.By;
 import page.StudentPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,6 +13,12 @@ public class DemoQATest {
 
     private StudentPage studentPage = new StudentPage();
     private Faker faker = new Faker();
+    private static final String CITY = "Karnal";
+    private static final String STATE = "Haryana";
+    private static final String IMAGE_NAME = "mrburns.png";
+    private static final String HOBBY = "Sports";
+    private static final String SUBJECT = "Computer Science";
+    private static final String DATE = "1/September/1993";
 
     @BeforeAll
     public static void setUp() {
@@ -29,20 +34,20 @@ public class DemoQATest {
         String cellPhone = faker.phoneNumber().cellPhone();
         String gender = faker.demographic().sex();
         final Student student = new Student(firstName, lastName, emailAddress, gender, cellPhone,
-                "1/September/1993", "Computer Science", "Sports", "mrburns.png", streetName, "Haryana", "Karnal");
+                DATE, SUBJECT, HOBBY, IMAGE_NAME, streetName, STATE, CITY);
         open("/");
-        studentPage.fillFirstName(By.cssSelector("#firstName"), student.getFirstName());
-        studentPage.fillLastName(By.cssSelector("#lastName"), student.getLastName());
-        studentPage.fillEmail(By.cssSelector("#userEmail"), student.getEmail());
+        studentPage.fillFirstName(student.getFirstName());
+        studentPage.fillLastName(student.getLastName());
+        studentPage.fillEmail(student.getEmail());
         studentPage.chooseGender(student.getGender());
-        studentPage.fillMobile(By.cssSelector("#userNumber"), student.getMobileNumber());
-        studentPage.setDatePicker(student.getDate(), ".react-datepicker__year-select", ".react-datepicker__month-select", ".react-datepicker__day");
-        studentPage.fillSubject(By.cssSelector("#subjectsInput"), "C", student.getSubject());
-        studentPage.upload(By.cssSelector("#uploadPicture"), student.getFileName());
-        studentPage.hobbies("//label[contains(text(),'" + student.getHobby() + "')]");
-        studentPage.curAddress("#currentAddress", student.getCurAddress());
+        studentPage.fillMobile(student.getMobileNumber());
+        studentPage.setDatePicker(student.getDate());
+        studentPage.fillSubject(student.getSubject());
+        studentPage.upload(student.getFileName());
+        studentPage.hobbies(student.getHobby());
+        studentPage.curAddress(student.getCurAddress());
         studentPage.location(student.getState(), student.getCity());
-        studentPage.sendForm("#submit");
+        studentPage.sendForm();
     }
 
 }
